@@ -3,17 +3,17 @@ const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
 var http = require('http');
 
-server.on('close',()=>{
+server.on('close', () => {
     console.log('socket closed');
 });
 
-server.on('error',(err)=>{
+server.on('error', err => {
     console.log(err);
 });
-server.on('listening',()=>{
+server.on('listening', () => {
     console.log('socket is listening..');
 });
-server.on('message',(msg,rinfo)=>{
+server.on('message', (msg, rinfo) => {
     console.log(`receive message from ${rinfo.address}:${rinfo.port}：${msg}`);
     var options = {
         hostname: '127.0.0.1',
@@ -26,11 +26,11 @@ server.on('message',(msg,rinfo)=>{
         }
     };
 
-    var req = http.request(options, (res) => {
+    var req = http.request(options, res => {
         console.log(`STATUS: ${res.statusCode}`);
         console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
         res.setEncoding('utf8');
-        res.on('data', (chunk) => {
+        res.on('data', chunk => {
             console.log(`BODY: ${chunk}`);
         });
         res.on('end', () => {
@@ -38,23 +38,25 @@ server.on('message',(msg,rinfo)=>{
         });
     });
 
-    req.on('error', (e) => {
+    req.on('error', e => {
         console.log(`problem with request: ${e.message}`);
     });
 
-// write data to request body
+    // write data to request body
     req.write(msg);
     req.end();
 
-    var req = http.request(options, function(res) {
+    var req = http.request(options, function (res) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             console.log("body: " + chunk);
         });
-        res.on('end',function(chunk){
+        res.on('end', function (chunk) {
             console.log("body: " + chunk);
-        })
+        });
     });
 });
 server.bind(8061);
 /** nohup /zhanway/node/node-v9.3.0-linux-x64/bin/node /zhanway/server/smoke-server/server.js > /data/logs/smoke_logs/smoke.out 2>&1*/
+
+//# sourceMappingURL=server-compiled.js.map
