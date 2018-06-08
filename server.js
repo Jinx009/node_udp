@@ -57,4 +57,4 @@ server.on('message',(msg,rinfo)=>{
     });
 });
 server.bind(8061);
-/** nohup /zhanway/server/smoke/server.js   > /data/somke/somke.out 2>&1 & */
+/** nohup /zhanway/server/smoke/server.js   > /data/logs/smoke_logs/somke.out 2>&1 & */

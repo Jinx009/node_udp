@@ -20,7 +20,7 @@ client.on('message',(msg,rinfo)=>{
 
 function sendMsg(){
     var message = '<1-10086-1-2309>';
-    client.send(message,0,message.length,8061,"127.0.0.1");
+    client.send(message,0,message.length,8061,"39.108.12.220");
 }
 
 client.bind(8060);
